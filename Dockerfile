@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get -y upgrade && \
     apt-get -y install build-essential texinfo libjpeg-dev \
     libpng-dev libelf-dev git subversion python curl \
-    make automake autoconfig autotools-dev && \
+    make automake autoconf autotools-dev && \
     apt-get autoclean
 
 RUN mkdir -p /opt/toolchains/dc/ && cd /opt/toolchains/dc/ && \
