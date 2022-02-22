@@ -11,7 +11,7 @@ RUN apt-get update && apt-get -y upgrade && \
 RUN mkdir -p /opt/toolchains/dc/ && cd /opt/toolchains/dc/ && \
     git clone git://git.code.sf.net/p/cadcdev/kallistios kos && \
     git clone git://git.code.sf.net/p/cadcdev/kos-ports && \
-    cd kos && cp config.mk.stable.sample config.mk && \
+    cd /opt/toolchains/dc/kos/utils/dc-chain && cp config.mk.stable.sample config.mk && \
     ./download.sh && ./unpack.sh && make patch && make build && make gdb && ./cleanup.sh
 
 RUN cp -r /opt/toolchains/dc/doc/environ.sh.sample /opt/toolchains/dc/environ.sh && \
