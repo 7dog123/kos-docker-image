@@ -2,9 +2,9 @@ FROM ubuntu:20.04 as build
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG INSTALL_DIR "/opt/toolchains/dc"
-ARG KOS "$INSTALL_DIR/kos"
-ARG PORTS "$INSTALL_DIR/kos-ports"
+ARG INSTALL_DIR="/opt/toolchains/dc"
+ARG KOS="$INSTALL_DIR/kos"
+ARG PORTS="$INSTALL_DIR/kos-ports"
 
 RUN apt-get update && apt-get -y upgrade && \
     apt-get -y install build-essential texinfo libjpeg-dev \
