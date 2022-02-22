@@ -3,7 +3,7 @@ FROM ubuntu:20.04 as build
 ENV DEBIAN_FRONTEND=noninteractive
 
 
-RUN apt-get update && apt-get upgrade && \
+RUN apt-get update && apt-get -y upgrade && \
     apt-get -y install build-essential texinfo libjpeg-dev \
     libpng-dev libelf-dev git subversion python curl \
     make automake autoconfig autotools-dev && \
