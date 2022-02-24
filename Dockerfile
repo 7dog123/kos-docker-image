@@ -21,7 +21,8 @@ RUN cd "$KOS/utils/dc-chain" &&  cp -r config.mk.testing.sample config.mk && \
     ./cleanup.sh
 
 RUN cd "$KOS" && cp -r "$KOS/doc/environ.sh.sample" "$KOS/environ.sh" && \
-    chmod 755 *sh && . "$KOS/environ.sh" && make && . "$PORTS/utils/build-all.sh"
+    chmod 755 *sh && . "$KOS/environ.sh" && make && . "$PORTS/utils/build-all.sh" && \
+    cp -r  "$KOS/environ.sh" /etc/profile.d/
 
 FROM scratch
 COPY --from=build / /
