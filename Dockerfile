@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y upgrade && \
     apt-get autoclean
 
 RUN mkdir -p "$INSTALL_DIR" && \
-    git clone https://github.com/7dog123/KallistiOS "$KOS" && \
+    git clone https://github.com/KallistiOS/KallistiOS "$KOS" && \
     git clone --recursive https://github.com/KallistiOS/kos-ports  "$PORTS"
 
 RUN cd "$KOS/utils/dc-chain" &&  cp -r config.mk.testing.sample config.mk && \
@@ -21,8 +21,15 @@ RUN cd "$KOS/utils/dc-chain" &&  cp -r config.mk.testing.sample config.mk && \
     ./cleanup.sh
 
 RUN cd "$KOS" && cp -r "$KOS/doc/environ.sh.sample" "$KOS/environ.sh" && \
-    chmod 755 *sh && . "$KOS/environ.sh" && make && . "$PORTS/utils/build-all.sh" && \
-    cp -r  "$KOS/environ.sh" /etc/profile.d/
+    chmod 755 *sh && . "$KOS/environ.sh" && make && . "$PORTS/utils/build-all.sh"
+
 
 FROM scratch
+
+ARG INSTALL_DIR="/opt/toolchains/dc"
+ARG KOS="$INSTALL_DIR/kos"
+ARG PORTS="$INSTALL_DIR/kos-ports"
+
+ENV "$KOS/environ.sh"
+
 COPY --from=build / /
