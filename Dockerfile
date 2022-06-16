@@ -24,12 +24,11 @@ RUN cd "$KOS" && cp -r "$KOS/doc/environ.sh.sample" "$KOS/environ.sh" && \
     chmod 755 *sh && . "$KOS/environ.sh" && make && . "$PORTS/utils/build-all.sh"
 
 
-FROM scratch
+FROM build
 
 ARG INSTALL_DIR="/opt/toolchains/dc"
 ARG KOS="$INSTALL_DIR/kos"
 ARG PORTS="$INSTALL_DIR/kos-ports"
 
-ENV "$KOS/environ.sh"
+ENTRYPOINT ["sh", "-c", "source $KOS/environ.sh && \"$@\"", "-s"]
 
-COPY --from=build / /
